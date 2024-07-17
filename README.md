@@ -17,13 +17,12 @@ npm install cheerio-tree
 
 ## Usage
 
-### Typescript
+### Easy YAML Config
 
-```typescript
-import yaml from 'js-yaml';
-import CheerioTree, { type CheerioTreeConfig } from 'cheerio-tree';
+Just look like:
 
-const config = `
+```yaml
+# ./config.yml
 tree:
   nodes:
     title:
@@ -32,7 +31,18 @@ tree:
       selector: body
       attr: html
       to_markdown: true
-`;
+    footer:
+      selector: .footer
+```
+
+### Typescript
+
+```typescript
+import fs from 'fs';
+import yaml from 'js-yaml';
+import CheerioTree, { type CheerioTreeConfig } from 'cheerio-tree';
+
+const config = fs.readFileSync('./config.yml', "utf-8");
 const html = `
 <html lang="en">
   <head>
@@ -50,8 +60,12 @@ const html = `
 const configYaml = yaml.load(config) as CheerioTreeConfig;
 
 const cheerioTree = new CheerioTree({ body: html });
-const data = cheerioTree.parse({configYaml});
-
+const data = cheerioTree.parse({
+  config: configYaml,
+  beforeParse: ({cheerio}) =>{
+    cheerio('body').append("<footer class='footer'>Append Text..</footer>")
+  }
+});
 console.log(data);
 
 ```
@@ -61,28 +75,14 @@ output
 ```json
 {
   "title": "Cheerio Tree",
-  "body": "Cheerio Tree\n============\n\nWhat is Cheerio Tree?\n---------------------\n\n**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of HTML data into JSON format. When paired with YAML, it provides an intuitive and streamlined approach to data handling and transformation."
+  "body": "Cheerio Tree\n============\n\nWhat is Cheerio Tree?\n---------------------\n\n**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of HTML data into JSON format. When paired with YAML, it provides an intuitive and streamlined approach to data handling and transformation.\n\nAppend Text..",
+  "footer": "Append Text.."
 }
-```
-
-## Easy YAML Config
-
-Just look like:
-
-```yaml
-tree:
-  nodes:
-    title:
-      selector: title
-    body:
-      selector: body
-      attr: html
-      to_markdown: true
 ```
 
 ![Yaml Nodes](doc/Cheerio-Tree.svg)
 
-### YAML Sample
+### YAML Sample for Google SERP Scraper
 
 Google SERP Scraper Config
 
@@ -296,3 +296,97 @@ tree:
 ```
 
 [src/__tests__/data/google/config.yml](src/__tests__/data/google/config.yml)
+
+After parse, Google SERP JSON Sample
+
+```json
+{
+    "meta": {
+      "query_displayed": "cheerio",
+      "result_stats": {
+        "total_results": "23300000",
+        "time_taken_displayed": "0.21"
+      }
+    },
+    "origin_results": {
+      "results": [
+        {
+          "type": "normal",
+          "position": 1,
+          "title": "Cheerio",
+          "snippet": "The fast, flexible & elegant library for parsing and manipulating HTML and XML.",
+          "source": {
+            "title": "Cheerio",
+            "name": "Cheerio",
+            "display_link": "https://cheerio.js.org",
+            "link": "https://cheerio.js.org/"
+          },
+          "snippet_highlighted_words": [],
+          "links": [
+            {
+              "title": "Tutorial",
+              "link": "https://cheerio.js.org/docs/intro"
+            },
+            {
+              "title": "API",
+              "link": "https://cheerio.js.org/docs/api"
+            },
+            {
+              "title": "Blog",
+              "link": "https://cheerio.js.org/blog"
+            }
+          ]
+        },
+        {
+          "type": "normal",
+          "position": 2,
+          "title": "cheeriojs/cheerio: The fast, flexible, and elegant library for ...",
+          "snippet": "The fast, flexible, and elegant library for parsing and manipulating HTML and XML. - cheeriojs/_cheerio_.",
+          "source": {
+            "title": "cheeriojs/cheerio: The fast, flexible, and elegant library for ...",
+            "name": "GitHub",
+            "display_link": "https://github.com › cheeriojs › cheerio",
+            "link": "https://github.com/cheeriojs/cheerio"
+          },
+          "snippet_highlighted_words": [
+            "cheerio"
+          ],
+          "links": [
+            {
+              "title": "Cheerio",
+              "link": "https://github.com/cheeriojs"
+            },
+            {
+              "title": "Issues 33",
+              "link": "https://github.com/cheeriojs/cheerio/issues"
+            },
+            {
+              "title": "Pull requests 14",
+              "link": "https://github.com/cheeriojs/cheerio/pulls"
+            },
+            {
+              "title": "Discussions",
+              "link": "https://github.com/cheeriojs/cheerio/discussions"
+            }
+          ]
+        },
+        {
+          "type": "normal",
+          "position": 3,
+          "title": "Cheerio",
+          "snippet": "Tiny, fast, and elegant implementation of core jQuery designed specifically for the server. Latest version: 1.0.0-rc.12, last published: 2 ...",
+          "source": {
+            "title": "Cheerio",
+            "name": "NPM",
+            "display_link": "https://www.npmjs.com › package › cheerio",
+            "link": "https://www.npmjs.com/package/cheerio"
+          },
+          "snippet_highlighted_words": []
+        },
+        ....
+      ]
+    }
+  }
+```
+
+

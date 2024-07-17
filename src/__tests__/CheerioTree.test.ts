@@ -17,7 +17,7 @@ describe('CheerioTree', () => {
 
   it('origin_results.results test', async () => {
     const data = cheerioTree.parse({config});
-    console.log(JSON.stringify(data, null, 2))
+    // console.log(JSON.stringify(data, null, 2))
     expect(data.meta.query_displayed).toEqual('cheerio');
     expect(data.origin_results.results.length).toBeGreaterThan(0);
   });
@@ -33,6 +33,8 @@ tree:
       selector: body
       attr: html
       to_markdown: true
+    footer:
+      selector: .footer
 `;
     const html = `
     <html lang="en">
@@ -51,8 +53,12 @@ tree:
     const configYaml = yaml.load(config) as CheerioTreeConfig;
 
     const cheerioTree = new CheerioTree({ body: html });
-    const data = cheerioTree.parse({config: configYaml});
+    const data = cheerioTree.parse({config: configYaml, beforeParse: ({cheerio}) =>{
+      cheerio('body').append("<div class='footer'>Append Text..</div>")
+    }});
+    // console.log(JSON.stringify(data, null, 2))
     expect(data.title).toEqual('Cheerio Tree');
+    expect(data.footer).toEqual('Append Text..');
   });
 
 })
