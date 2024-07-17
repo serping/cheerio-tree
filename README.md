@@ -8,6 +8,12 @@ What is Cheerio Tree?
 
 ```bash
 npm install cheerio-tree
+
+# or
+yarn add cheerio-tree
+
+# or
+pnpm install cheerio-tree
 ```
 
 ## Dependencies
