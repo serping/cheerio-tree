@@ -54,7 +54,15 @@ const data = cheerioTree.parse({configYaml});
 
 console.log(data);
 
-// output {"title":"Cheerio Tree","body":"Cheerio Tree\n============\n\nWhat is Cheerio Tree?\n---------------------\n\n**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of HTML data into JSON format. When paired with YAML, it provides an intuitive and streamlined approach to data handling and transformation."}
+```
+
+output
+
+```json
+{
+  "title": "Cheerio Tree",
+  "body": "Cheerio Tree\n============\n\nWhat is Cheerio Tree?\n---------------------\n\n**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of HTML data into JSON format. When paired with YAML, it provides an intuitive and streamlined approach to data handling and transformation."
+}
 ```
 
 ## Easy YAML Config
