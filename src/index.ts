@@ -7,17 +7,20 @@ const turndownService = new TurndownService();
 export default class CheerioTree{
     cheerio: CheerioAPI;
     debug: boolean;
+    duration: boolean;
     base64Img: boolean;
     clearBody: string;
-  
+    
     /**
      * 
      * @param body HTML
      * @param clear boolean, default true. if true the style, noscript html tags will be remove
      * @param base64Img boolean, default true. if false the image base64 data will output **imageBase64**, only for key: **thumbnail**
+     * @param duration boolean, default false. add parse_duration to meta { meta: { ...meta, parse_duration: "** ms" } }
      * @param debug
      */
-    constructor({body, debug = false, clear = false , base64Img = true }: CheerioTreeOptions) {
+    constructor({body, debug = false, clear = false , base64Img = true, duration = false }: CheerioTreeOptions) {
+      this.duration = duration; 
       this.debug = debug; 
       this.base64Img = base64Img 
 
@@ -61,7 +64,7 @@ export default class CheerioTree{
       const endTime = new Date().getTime();
       const execTimeMs = (endTime - startTime);
       
-      if(this.debug){
+      if(this.duration){
         if(!data['meta']) data['meta'] = {};
         data['meta'] = {
           ...data['meta'],

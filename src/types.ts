@@ -50,4 +50,5 @@ export type CheerioTreeOptions = {
   base64Img?: boolean;
   clear?: boolean;
   debug?: boolean;
+  duration?: boolean;
 }
