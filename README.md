@@ -66,8 +66,7 @@ tree:
       attr: html
       to_markdown: true
 ```
-
-[Yaml Nodes](doc/Cheerio-Tree.svg)
+![Yaml Nodes](doc/Cheerio-Tree.svg)
 
 ### YAML Sample
 
