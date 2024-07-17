@@ -52,7 +52,24 @@ console.log(data);
 // output {"title":"Cheerio Tree","body":"Cheerio Tree\n============\n\nWhat is Cheerio Tree?\n---------------------\n\n**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of HTML data into JSON format. When paired with YAML, it provides an intuitive and streamlined approach to data handling and transformation.","meta":{"parse_duration":"1 ms"}}
 ```
 
-## YAML Sample
+## Easy YAML Config
+
+Just look like:
+
+```yaml
+tree:
+  nodes:
+    title:
+      selector: title
+    body:
+      selector: body
+      attr: html
+      to_markdown: true
+```
+
+[Yaml Nodes](doc/Cheerio-Tree.svg)
+
+### YAML Sample
 
 Google SERP Scraper Config
 

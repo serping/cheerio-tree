@@ -222,8 +222,7 @@ export default class CheerioTree{
                 }else if(this.hasElement({element, selector: type.validate.selector})){
                   // except node
                   if(type.validate.except && this.hasElement({element, selector: type.validate.except})) continue;
-                  // dataConfig = {index: (type.rename ?? type.name),...wrapper[type.name]};
-                  dataConfig = {index: type.name,...wrapper[type.name]};
+                  dataConfig = {index: (type.rename ?? type.name),...wrapper[type.name]};
                 }
               }
               // default data type normal
