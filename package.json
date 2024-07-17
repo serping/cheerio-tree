@@ -1,6 +1,6 @@
 {
   "name": "cheerio-tree",
-  "version": "1.0.0",
+  "version": "1.0.1-rc.0",
   "description": "**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of **HTML data into JSON format**. When paired with **YAML**, it provides an intuitive and streamlined approach to data handling and transformation.",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "clean-tests": "rm -rf dist/__tests__",
     "clean": "rm -rf dist/*",
     "copy": "cp package.json README.md dist",
-    "release": "npx standard-version --prerelease beta",
-    "publish:beta": "npm run build && npm run release && git push --follow-tags origin main && cd dist && npm publish --tag beta && cd ../",
+    "release": "npx standard-version --prerelease rc",
+    "publish:rc": "npm run build && npm run release && git push --follow-tags origin main && cd dist && npm publish --tag rc && cd ../",
     "test": "npx jest"
   },
   "exports": {
