@@ -29,6 +29,7 @@
     "DOM parsing",
     "DOM"
   ],
+  "license": "MIT",
   "author": "sead",
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
