@@ -54,7 +54,7 @@ console.log(data);
 
 ## YAML Sample
 
-Google SERP Config
+Google SERP Scraper Config
 
 ```yaml
 regexToI: &regexToI
