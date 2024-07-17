@@ -92,11 +92,11 @@ regexToK: &regexToK
 
 regexToM: &regexToM
   regex: 'M'
-  replace: "000"
+  replace: "000000"
   
 regexToB: &regexToB
   regex: 'B'
-  replace: "000"
+  replace: "000000000"
 
 # string to int
 # eg. 1.1K will be 1100
