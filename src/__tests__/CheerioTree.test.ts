@@ -52,6 +52,7 @@ tree:
 
     const cheerioTree = new CheerioTree({ body: html });
     const data = cheerioTree.parse({config: configYaml});
+    expect(data.title).toEqual('Cheerio Tree');
   });
 
 })

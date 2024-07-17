@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import type { CheerioAPI } from 'cheerio'; 
 import TurndownService from 'turndown';
-import type { RequiredKeys, SelectorNode,  CheerioTreeConfig, CheerioTreeOptions, HasElement, ParseSelector, ParseNode} from './types';
+import type { RequiredKeys, SelectorNode,  CheerioTreeConfig, CheerioTreeOptions, HasElement, ParseNode, ParseWrapper} from './types';
 
 const turndownService = new TurndownService(); 
 export default class CheerioTree{
@@ -84,7 +84,7 @@ export default class CheerioTree{
       return this.cheerio(element).find(selector).length > 0;
     }
    
-    parseNode: ParseSelector =({item, parentElement, parentKey} ) =>{
+    parseNode: ParseNode =({item, parentElement, parentKey} ) =>{
       try{
         if (typeof item !== 'object') {
           throw new Error('Invalid selector item');
@@ -174,7 +174,7 @@ export default class CheerioTree{
       }
     }
   
-    parseWrapper: ParseNode =({
+    parseWrapper: ParseWrapper =({
       item,
       parentElement,
       parentKey

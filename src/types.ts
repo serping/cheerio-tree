@@ -1,7 +1,7 @@
 import type { Cheerio } from 'cheerio'; 
 export type RequiredKeys = ({keys, item}:{keys: string[]; item: Record<string, any> }) => boolean;
 export type HasElement = ({element, selector}:{element: Cheerio<any>; selector: string}) => boolean;
-export type ParseSelector = ({
+export type ParseNode = ({
   item, 
   parentElement, 
   parentKey
@@ -11,7 +11,7 @@ export type ParseSelector = ({
   parentKey: string 
 }) => any[] | string | null;
 
-export type ParseNode =({
+export type ParseWrapper =({
   item,
   parentElement,
   parentKey
