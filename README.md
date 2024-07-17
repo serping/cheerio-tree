@@ -16,7 +16,7 @@ npm install cheerio-tree
 
 ```typescript
 import yaml from 'js-yaml';
-import type { CheerioTreeOptions, CheerioTreeConfig } from 'cheerio-tree/types';
+import CheerioTree { type CheerioTreeOptions, type CheerioTreeConfig } from 'cheerio-tree';
 
 const config = `
 tree:
