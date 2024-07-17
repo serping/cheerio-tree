@@ -1,8 +1,16 @@
 {
   "name": "cheerio-tree",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of **HTML data into JSON format**. When paired with **YAML**, it provides an intuitive and streamlined approach to data handling and transformation.",
+  "main": "index.js",
   "scripts": {
+    "build": "npm run clean && tsc && npm run build:types && npm run copy && npm run clean-tests",
+    "build:types": "tsc --declaration --emitDeclarationOnly",
+    "clean-tests": "rm -rf dist/__tests__",
+    "clean": "rm -rf dist/*",
+    "copy": "cp package.json README.md dist",
+    "release": "npx standard-version --prerelease beta",
+    "publish:beta": "npm run build && npm run release && git push --follow-tags origin main && cd dist && npm publish --tag beta && cd ../",
     "test": "npx jest"
   },
   "exports": {
@@ -15,7 +23,12 @@
       "default": "./*.js"
     }
   },
-  "keywords": [],
+  "keywords": [
+    "cheerio",
+    "tree",
+    "DOM parsing",
+    "DOM"
+  ],
   "author": "sead",
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
@@ -26,9 +39,15 @@
     "@types/js-yaml": "^4.0.9",
     "@types/turndown": "^5.0.4",
     "jest": "^29.7.0",
-    "ts-jest": "^29.2.2",
     "js-yaml": "^4.1.0",
+    "pre-commit": "^1.2.2",
+    "standard-version": "^9.5.0",
+    "ts-jest": "^29.2.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.16.2",
     "typescript": "^5.4.5"
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }

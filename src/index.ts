@@ -14,8 +14,7 @@ export default class CheerioTree{
      * 
      * @param body HTML
      * @param clear boolean, default true. if true the style, noscript html tags will be remove
-     * @param base64Img boolean, default true. if false the image base64 data will output **imageBase64**,
-     * only for key: **thumbnail**
+     * @param base64Img boolean, default true. if false the image base64 data will output **imageBase64**, only for key: **thumbnail**
      * @param debug
      */
     constructor({body, debug = false, clear = false , base64Img = true }: CheerioTreeOptions) {
@@ -57,7 +56,7 @@ export default class CheerioTree{
       let data: any = {};
 
       for (const [key, value] of Object.entries(nodes)) {
-        data[key] = this.parseNode({item: value, parentElement: null, parentKey: 'nodes' }); 
+        data[key] = this.parseWrapper({item: value, parentElement: null, parentKey: `nodes.${key}` }); 
       }
       const endTime = new Date().getTime();
       const execTimeMs = (endTime - startTime);
@@ -85,10 +84,10 @@ export default class CheerioTree{
       return this.cheerio(element).find(selector).length > 0;
     }
    
-    parseSelector: ParseSelector =({item, parentElement, parentKey} ) =>{
+    parseNode: ParseSelector =({item, parentElement, parentKey} ) =>{
       try{
         if (typeof item !== 'object') {
-          throw new Error('Invalid item or Cheerio instance');
+          throw new Error('Invalid selector item');
         }
         let itemSelector = item as SelectorNode;
         
@@ -175,7 +174,7 @@ export default class CheerioTree{
       }
     }
   
-    parseNode: ParseNode =({
+    parseWrapper: ParseNode =({
       item,
       parentElement,
       parentKey
@@ -207,7 +206,7 @@ export default class CheerioTree{
             if(elements.length == 0) return list ? data : null;
       
             
-            elements.each((index, element) => {
+            elements.each((__index, element) => {
               if(remove_children_node && remove_children_node.selector) this.cheerio(element).find(remove_children_node.selector).remove();
               const itemData: any = {};
               let dataConfig: Record<string, any> | null = null;
@@ -237,7 +236,7 @@ export default class CheerioTree{
               }
     
               if('wrapper' in dataConfig){
-                itemData[dataConfig['index']] = this.parseNode({item: dataConfig, parentElement: element, parentKey}); 
+                itemData[dataConfig['index']] = this.parseWrapper({item: dataConfig, parentElement: element, parentKey}); 
               }else{ 
                 for (const [key, value] of  Object.entries(dataConfig)) {
                   // skip keys
@@ -246,10 +245,10 @@ export default class CheerioTree{
                   let itemValue;
                    
                   if('wrapper' in value){
-                    itemValue = this.parseNode({item: value, parentElement: element, parentKey: keyPath});
+                    itemValue = this.parseWrapper({item: value, parentElement: element, parentKey: keyPath});
                     if(itemValue === null || (Object.keys(itemValue).length === 0 && !this.debug)) continue;
                   }else{
-                    itemValue = this.parseSelector({item: value, parentElement: element, parentKey: keyPath });
+                    itemValue = this.parseNode({item: value, parentElement: element, parentKey: keyPath });
                   }
                   if(this.debug) itemValue = {value: itemValue, path: keyPath};
                   if(itemValue && itemValue !== '') itemData[key] = itemValue;
@@ -272,7 +271,9 @@ export default class CheerioTree{
           throw `wrapper format error: ${parentKey}`
         }
       }else{
-        return this.parseSelector({item, parentElement, parentKey} )
+        return this.parseNode({item, parentElement, parentKey} )
       }
     }
   }
+
+export { CheerioTreeConfig, CheerioTreeOptions }

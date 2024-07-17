@@ -20,7 +20,7 @@ _.seed
 build/Release
 
 # Dependency directories
-
+dist
 node_modules/
 jspm_packages/
 

@@ -193,30 +193,14 @@ tree:
                       replace:
     origin_results:
       wrapper:
-      list: false
-      selector: div[id="rcnt"]
-      other_types:
-        - name: tablist
-          validate:
-            selector: div.XqFnDf [role="tablist"]
-      tablist:
-        tabs:
-          selector: span[jsname="AznF2e"]
-          is_array: true
-        results:
-          wrapper:
-            remove_children_node:
-              selector: .LEwnzc.Sqrs4e
-            position: true
-            list: true
-            selector: '#rso > .MjjYud, #Odp5De, #rso > .ULSxyf .TzHB6b'
-            <<: *origin_search_normal
-      normal:
-        results:
-          wrapper:
-            remove_children_node:
-              selector: .LEwnzc.Sqrs4e
-            position: true
-            list: true
-            selector: '#rso > .MjjYud, #rso div > .MjjYud, #Odp5De'
-            <<: *origin_search_normal
+        list: false
+        selector: div[id="rcnt"]
+        normal:
+          results:
+            wrapper:
+              remove_children_node:
+                selector: .LEwnzc.Sqrs4e
+              position: true
+              list: true
+              selector: '#rso > .MjjYud, #rso div > .MjjYud, #Odp5De'
+              <<: *origin_search_normal
