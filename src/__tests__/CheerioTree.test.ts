@@ -17,7 +17,7 @@ describe('CheerioTree', () => {
 
   it('origin_results.results test', async () => {
     const data = cheerioTree.parse({config});
-    // console.log(JSON.stringify(data, null, 2))
+    console.log(JSON.stringify(data, null, 2))
     expect(data.meta.query_displayed).toEqual('cheerio');
     expect(data.origin_results.results.length).toBeGreaterThan(0);
   });

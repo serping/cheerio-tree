@@ -60,11 +60,15 @@ export default class CheerioTree{
       }
       const endTime = new Date().getTime();
       const execTimeMs = (endTime - startTime);
-      if(!data['meta']) data['meta'] = {};
-      data['meta'] = {
-        ...data['meta'],
-        parse_duration: `${execTimeMs} ms`,
+      
+      if(this.debug){
+        if(!data['meta']) data['meta'] = {};
+        data['meta'] = {
+          ...data['meta'],
+          parse_duration: `${execTimeMs} ms`,
+        }
       }
+      
       return data;
     }
 
