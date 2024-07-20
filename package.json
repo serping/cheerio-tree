@@ -1,6 +1,6 @@
 {
   "name": "cheerio-tree",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "**Cheerio Tree** is a powerful utility built on **Cheerio**, designed for efficient DOM parsing. It enables rapid conversion of **HTML data into JSON format**. When paired with **YAML**, it provides an intuitive and streamlined approach to data handling and transformation.",
   "main": "index.js",
   "scripts": {
