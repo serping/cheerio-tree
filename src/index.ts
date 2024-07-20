@@ -9,6 +9,7 @@ export default class CheerioTree{
     debug: boolean;
     duration: boolean;
     base64Img: boolean;
+    clear: boolean;
     clearBody: string;
     
     /**
@@ -22,17 +23,24 @@ export default class CheerioTree{
     constructor({body, debug = false, clear = false , base64Img = true, duration = false }: CheerioTreeOptions) {
       this.duration = duration; 
       this.debug = debug; 
+      this.clear = clear; 
       this.base64Img = base64Img 
 
-      if(clear){
-        this.clearBody = body.replace(/(<style>[\S\s]*?<\/style>|<noscript>[\S\s]*?<\/noscript>)/g,'');
-      }else{
-        this.clearBody = body
-      }
-  
+      this.clearBody = clear ? this.clearTags(body) : body;
       this.cheerio = cheerio.load(this.clearBody);
-  
-      if(clear){ this.cheerio('script,noscript').remove(); }
+    }
+
+    clearTags(body:string){
+      return body.replace(/(<style>[\S\s]*?<\/style>|<noscript>[\S\s]*?<\/noscript>|<script>[\S\s]*?<\/script>)/g,'');
+    }
+
+    /**
+     * 
+     * @param body reload this.cheerio
+     */
+    load(body:string){
+      this.clearBody = this.clear ? this.clearTags(body) : body;
+      this.cheerio = cheerio.load(this.clearBody);
     }
 
     decodeEncodedHTML(encodedText: string) {
