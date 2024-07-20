@@ -20,6 +20,12 @@ describe('CheerioTree', () => {
     // console.log(JSON.stringify(data, null, 2))
     expect(data.meta.query_displayed).toEqual('cheerio');
     expect(data.origin_results.results.length).toBeGreaterThan(0);
+
+    // test reload
+    cheerioTree.load(body);
+    const reload = cheerioTree.parse({config});
+    expect(reload.meta.query_displayed).toEqual('cheerio');
+    expect(reload.origin_results.results.length).toBeGreaterThan(0);
   });
 
 
