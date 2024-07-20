@@ -31,7 +31,7 @@ export default class CheerioTree{
     }
 
     clearTags(body:string){
-      return body.replace(/(<style>[\S\s]*?<\/style>|<noscript>[\S\s]*?<\/noscript>|<script>[\S\s]*?<\/script>)/g,'');
+      return body.replace(/(<style.*?>[\S\s]*?<\/style>|<noscript.*?>[\S\s]*?<\/noscript>|<script.*?>[\S\s]*?<\/script>)/g,'');
     }
 
     /**
