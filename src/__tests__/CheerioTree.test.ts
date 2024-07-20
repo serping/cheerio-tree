@@ -6,6 +6,7 @@ const cwd = process.cwd();
 
 describe('CheerioTree', () => {
   let cheerioTree: CheerioTree;
+  let cheerioTreeClear: CheerioTree;
   const body = fs.readFileSync( cwd + '/src/__tests__/data/google/serp.html').toString("utf8");
   const configYml = fs.readFileSync( cwd + '/src/__tests__/data/google/config.yml').toString("utf8");
   const defaultConfig: CheerioTreeOptions = { body: body };
@@ -13,6 +14,7 @@ describe('CheerioTree', () => {
 
   beforeEach(() => {
     cheerioTree = new CheerioTree(defaultConfig);
+    cheerioTreeClear = new CheerioTree({ body, clear: true });
   });
 
   it('origin_results.results test', async () => {
@@ -26,6 +28,14 @@ describe('CheerioTree', () => {
     const reload = cheerioTree.parse({config});
     expect(reload.meta.query_displayed).toEqual('cheerio');
     expect(reload.origin_results.results.length).toBeGreaterThan(0);
+  });
+
+  it('test clear', async () => {
+    const data = cheerioTreeClear.parse({config, beforeParse: ({cheerio}) =>{ 
+      expect(cheerio('style,noscript,script').length).toEqual(0);
+    }}); 
+    expect(data.meta.query_displayed).toEqual('cheerio');
+    expect(data.origin_results.results.length).toBeGreaterThan(0); 
   });
 
 
