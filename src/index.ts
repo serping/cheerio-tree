@@ -61,12 +61,12 @@ export default class CheerioTree{
       return this.cheerio.html();
     }
   
-    parse({ config, beforeParse }: { config:  CheerioTreeConfig, beforeParse?: ({cheerio}:{cheerio: CheerioAPI}) => void}) {
+    parse({ config, beforeParse }: { config:  CheerioTreeConfig, beforeParse?: ({cheerio, body}:{cheerio: CheerioAPI, body?: string;}) => void}) {
       const startTime = new Date().getTime(); 
       const { tree: { nodes } } = config;
       let data: any = {};
 
-      if(beforeParse) beforeParse({cheerio: this.cheerio})
+      if(beforeParse) beforeParse({cheerio: this.cheerio, body: this.clearBody});
 
       for (const [key, value] of Object.entries(nodes)) {
         data[key] = this.parseWrapper({item: value, parentElement: null, parentKey: `nodes.${key}` }); 
