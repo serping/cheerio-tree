@@ -15,7 +15,7 @@ export default class CheerioTree{
     /**
      * 
      * @param body HTML
-     * @param clear boolean, default true. if true the style, noscript html tags will be remove
+     * @param clear boolean, default false. if true the style, noscript html tags will be remove
      * @param base64Img boolean, default true. if false the image base64 data will output **imageBase64**, only for key: **thumbnail**
      * @param duration boolean, default false. add parse_duration to meta { meta: { ...meta, parse_duration: "** ms" } }
      * @param debug
