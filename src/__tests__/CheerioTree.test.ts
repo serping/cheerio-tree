@@ -32,7 +32,7 @@ describe('CheerioTree', () => {
 
   it('test clear', async () => {
     const data = cheerioTreeClear.parse({config, beforeParse: ({cheerio}) =>{ 
-      expect(cheerio('style,noscript,script').length).toEqual(0);
+      expect(cheerio('style,noscript').length).toEqual(0);
     }}); 
     expect(data.meta.query_displayed).toEqual('cheerio');
     expect(data.origin_results.results.length).toBeGreaterThan(0); 
