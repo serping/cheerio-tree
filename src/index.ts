@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import type { CheerioAPI } from 'cheerio'; 
 import TurndownService from 'turndown';
 import type { RequiredKeys, SelectorNode,  CheerioTreeConfig, CheerioTreeOptions, HasElement, ParseNode, ParseWrapper} from './types';
