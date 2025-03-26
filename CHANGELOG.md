@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.9-rc.0](https://github-serping/serping/cheerio-tree/compare/v1.0.8...v1.0.9-rc.0) (2025-03-26)
+
 ### [1.0.8](https://github.com/serping/cheerio-tree/compare/v1.0.7...v1.0.8) (2024-08-03)
 
 ### [1.0.7](https://github.com/serping/cheerio-tree/compare/v1.0.6...v1.0.7) (2024-07-29)
